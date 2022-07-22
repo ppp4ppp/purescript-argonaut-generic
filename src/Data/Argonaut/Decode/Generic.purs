@@ -68,8 +68,7 @@ withTagAndValues ::
     }
 withTagAndValues e j name = do
   {tag, decodingErr} <- withTag e j name
-  jObj <- note (decodingErr $ TypeMismatch "Object") (toObject j)
-  values <- note (decodingErr $ AtKey e.valuesKey MissingValue) (FO.lookup e.valuesKey jObj)
+  values <- pure (fromArray [j]) 
   pure {tag, values, decodingErr}
 
 construct ::

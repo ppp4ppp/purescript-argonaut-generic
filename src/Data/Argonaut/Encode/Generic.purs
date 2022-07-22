@@ -41,6 +41,18 @@ instance encodeRepConstructor :: (IsSymbol name, EncodeRepArgs a) => EncodeRep (
   encodeRepWith e (Rep.Constructor a) =
     fromObject
       $ FO.insert e.tagKey (fromString (reflectSymbol (Proxy :: Proxy name)))
+      $ values
+    where
+      values =
+        let vs = encodeRepArgs a in
+        case vs of
+          [v] -> fromMaybe FO.empty (toObject v)
+          _ -> FO.empty
+{-
+instance encodeRepConstructor :: (IsSymbol name, EncodeRepArgs a) => EncodeRep (Rep.Constructor name a) where
+  encodeRepWith e (Rep.Constructor a) =
+    fromObject
+      $ FO.insert e.tagKey (fromString (reflectSymbol (Proxy :: Proxy name)))
       $ FO.insert e.valuesKey values
       $ FO.empty
     where
@@ -51,6 +63,7 @@ instance encodeRepConstructor :: (IsSymbol name, EncodeRepArgs a) => EncodeRep (
             [v] -> v
             _ -> fromArray vs
           else fromArray vs
+-}
 
 class EncodeRepArgs r where
   encodeRepArgs :: r -> Array Json

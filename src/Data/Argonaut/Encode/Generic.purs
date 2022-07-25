@@ -23,6 +23,7 @@ import Foreign.Object as FO
 import Partial.Unsafe (unsafeCrashWith)
 import Prim.TypeError (class Fail, Text)
 import Type.Proxy (Proxy(..))
+import Data.Maybe
 
 class EncodeRep r where
   encodeRepWith :: Encoding -> r -> Json

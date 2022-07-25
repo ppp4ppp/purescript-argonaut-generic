@@ -14,7 +14,7 @@ module Data.Argonaut.Encode.Generic (
 
 import Prelude
 
-import Data.Argonaut.Core (Json, fromArray, fromObject, fromString)
+import Data.Argonaut.Core (Json, fromArray, fromObject, fromString, toObject)
 import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
 import Data.Argonaut.Types.Generic (Encoding, defaultEncoding)
 import Data.Generic.Rep as Rep
